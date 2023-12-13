@@ -1,0 +1,69 @@
+
+
+########################################################
+#Obtiene los  requisitos funcionales de los servicios
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX on: <https://www.ia.urjc.es/ontologies/ontologyNetwork/> 
+SELECT DISTINCT  ?serv ?fr
+WHERE {
+	?serv on:hasFunctionalRequirement ?fr.
+	?serv rdf:type on:Service .
+}ORDER BY ?serv
+
+
+
+
+
+########################################################
+#Obtener la lista de los requerimientos computacionales de cada servicio junto su valor:
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX on: <https://www.ia.urjc.es/ontologies/ontologyNetwork/> 
+SELECT DISTINCT  ?serv ?fr ?val
+WHERE {
+
+	?serv on:hasComputationalRequirement ?fr.
+	?serv rdf:type on:Service .
+	?fr on:hasValue ?val.
+}ORDER BY ?serv
+
+
+########################################################
+#Obtener los recursos computacionales por nodo junto con su valor:
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX on: <https://www.ia.urjc.es/ontologies/ontologyNetwork/> 
+SELECT DISTINCT  ?serv ?fr ?val
+WHERE {
+
+	?serv on:hasComputationalResource ?fr.
+	?serv rdf:type on:ComputingNode .
+	?fr on:hasValue ?val.
+}ORDER BY ?serv
+
+########################################################
+#Obtener los recursos funcionales de los nodos:
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX on: <https://www.ia.urjc.es/ontologies/ontologyNetwork/> 
+SELECT DISTINCT  ?serv ?fr ?val
+WHERE {
+
+	?serv on:hasFunctionalResource ?fr.
+	?serv rdf:type on:ComputingNode .
+
+}ORDER BY ?serv
+
+
+
+
+
+
+
+########################################################
+#Obtener los recursos funcionales compartidos por los nodos
