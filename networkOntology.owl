@@ -1,0 +1,217 @@
+@prefix : <https://www.ia.urjc.es/ontologies/networkOntology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://www.ia.urjc.es/ontologies/networkOntology/> .
+
+<https://www.ia.urjc.es/ontologies/networkOntology/> rdf:type owl:Ontology ;
+                                                      owl:versionIRI <https://www.ia.urjc.es/ontologies/networkOntology/> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/connectedTo
+:connectedTo rdf:type owl:ObjectProperty ;
+             rdfs:domain :ComputingNode ;
+             rdfs:range :ComputingNode .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/deployedIn
+:deployedIn rdf:type owl:ObjectProperty ;
+            rdfs:domain :Software ;
+            rdfs:range :ComputingNode .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasCommunicationRequirement
+:hasCommunicationRequirement rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf :hasRequirement ;
+                             rdfs:domain :Software ;
+                             rdfs:range :CommunicationResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasCommunicationResource
+:hasCommunicationResource rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :hasResource ;
+                          rdfs:domain :ComputingNode ;
+                          rdfs:range :CommunicationResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasComputationalRequirement
+:hasComputationalRequirement rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf :hasRequirement ;
+                             rdfs:domain :Software ;
+                             rdfs:range :ComputationalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasComputationalResource
+:hasComputationalResource rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :hasResource ;
+                          rdfs:domain :ComputingNode ;
+                          rdfs:range :ComputationalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasFunctionalRequirement
+:hasFunctionalRequirement rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :hasRequirement ;
+                          rdfs:domain :Software ;
+                          rdfs:range :FunctionalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasFunctionalResource
+:hasFunctionalResource rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :hasResource ;
+                       rdfs:domain :ComputingNode ;
+                       rdfs:range :FunctionalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasRequirement
+:hasRequirement rdf:type owl:ObjectProperty ;
+                rdfs:domain :Software ;
+                rdfs:range :Resource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasResource
+:hasResource rdf:type owl:ObjectProperty ;
+             rdfs:domain :ComputingNode ;
+             rdfs:range :Resource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/physicallyLocatedAt
+:physicallyLocatedAt rdf:type owl:ObjectProperty ,
+                              owl:TransitiveProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :ComputingNode
+                                                 :Resource
+                                               )
+                                 ] ;
+                     rdfs:range :Location .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasLatitude
+:hasLatitude rdf:type owl:DatatypeProperty ;
+             rdfs:domain :GeoLocation ;
+             rdfs:range xsd:double .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasLongitude
+:hasLongitude rdf:type owl:DatatypeProperty ;
+              rdfs:domain :GeoLocation ;
+              rdfs:range xsd:double .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasUnit
+:hasUnit rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :CommunicationResource
+                                     :ComputationalResource
+                                   )
+                     ] ;
+         rdfs:range xsd:string .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/hasValue
+:hasValue rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Address
+:Address rdf:type owl:Class ;
+         rdfs:subClassOf :Location .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Bandwidth
+:Bandwidth rdf:type owl:Class ;
+           rdfs:subClassOf :CommunicationResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Camera
+:Camera rdf:type owl:Class ;
+        rdfs:subClassOf :FunctionalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/CommunicationResource
+:CommunicationResource rdf:type owl:Class ;
+                       rdfs:subClassOf :Resource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/ComputationalResource
+:ComputationalResource rdf:type owl:Class ;
+                       rdfs:subClassOf :Resource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/ComputingNode
+:ComputingNode rdf:type owl:Class .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Disk
+:Disk rdf:type owl:Class ;
+      rdfs:subClassOf :ComputationalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/FunctionalResource
+:FunctionalResource rdf:type owl:Class ;
+                    rdfs:subClassOf :Resource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Generic
+:Generic rdf:type owl:Class ;
+         rdfs:subClassOf :Location .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/GeoLocation
+:GeoLocation rdf:type owl:Class ;
+             rdfs:subClassOf :Location .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/HumiditySensor
+:HumiditySensor rdf:type owl:Class ;
+                rdfs:subClassOf :Sensor .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Location
+:Location rdf:type owl:Class .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Memory
+:Memory rdf:type owl:Class ;
+        rdfs:subClassOf :ComputationalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Resource
+:Resource rdf:type owl:Class .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Sensor
+:Sensor rdf:type owl:Class ;
+        rdfs:subClassOf :FunctionalResource .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Service
+:Service rdf:type owl:Class ;
+         rdfs:subClassOf :Software .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Shareable
+:Shareable rdf:type owl:Class .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/Software
+:Software rdf:type owl:Class .
+
+
+###  https://www.ia.urjc.es/ontologies/networkOntology/TemperatureSensor
+:TemperatureSensor rdf:type owl:Class ;
+                   rdfs:subClassOf :Sensor .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
